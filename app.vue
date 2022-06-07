@@ -1,5 +1,6 @@
 <template>
   <div>
-    <NuxtWelcome />
+    <v-btn>button</v-btn>
+    <v-icon>mdi-alert-circle</v-icon>
   </div>
 </template>

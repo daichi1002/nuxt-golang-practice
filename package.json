@@ -9,12 +9,17 @@
     "lintfix": "eslint --fix --ext .ts,.js,.vue --ignore-path .gitignore ."
   },
   "devDependencies": {
+    "@mdi/font": "^6.7.96",
+    "@mdi/js": "^6.7.96",
     "@nuxtjs/eslint-config-typescript": "^10.0.0",
+    "@vuetify/vite-plugin": "^1.0.0-alpha.11",
     "eslint": "^8.17.0",
     "eslint-config-prettier": "^8.5.0",
     "nuxt": "3.0.0-rc.3",
     "prettier": "^2.6.2",
-    "typescript": "^4.7.3"
+    "sass": "^1.52.2",
+    "typescript": "^4.7.3",
+    "vuetify": "^3.0.0-beta.3"
   },
   "dependencies": {
     "@nuxtjs/eslint-module": "^3.1.0",
