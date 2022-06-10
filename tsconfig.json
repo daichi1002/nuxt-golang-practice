@@ -1,4 +1,5 @@
 {
   // https://v3.nuxtjs.org/concepts/typescript
+  // .nuxt/tsconfig.jsonでTypeScriptのおすすめの設定を記載したものを引き継いでいる
   "extends": "./.nuxt/tsconfig.json"
 }
