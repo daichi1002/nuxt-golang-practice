@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app style="background-color: #f5f5f5">
     <v-app-bar color="primary">
       <v-app-bar-nav-icon></v-app-bar-nav-icon>
       <v-app-bar-title>Nuxt3-Blog-App</v-app-bar-title>
