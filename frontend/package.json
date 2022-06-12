@@ -2,7 +2,7 @@
   "private": true,
   "scripts": {
     "build": "nuxt build",
-    "dev": "nuxt dev && graphql-codegen",
+    "dev": "graphql-codegen && nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "lint": "eslint --ext .ts,.js,.vue --ignore-path .gitignore .",
@@ -26,10 +26,12 @@
     "vuetify": "^3.0.0-beta.3"
   },
   "dependencies": {
+    "@graphql-codegen/cli": "^2.6.2",
     "@graphql-codegen/typescript": "^2.5.1",
     "@graphql-codegen/typescript-graphql-request": "^4.4.10",
     "@graphql-codegen/typescript-operations": "^2.4.2",
     "@nuxtjs/eslint-module": "^3.1.0",
-    "eslint-plugin-nuxt": "^3.2.0"
+    "eslint-plugin-nuxt": "^3.2.0",
+    "graphql": "^16.5.0"
   }
 }
