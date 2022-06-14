@@ -5,5 +5,5 @@ type Article {
 }
 
 type Query {
-  article(id: Int!): Article!
+  getArticle: [Article!]
 }

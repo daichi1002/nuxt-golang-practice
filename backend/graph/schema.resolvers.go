@@ -7,11 +7,10 @@ import (
 	"backend/graph/generated"
 	"backend/graph/model"
 	"context"
-	"fmt"
 )
 
-func (r *queryResolver) Article(ctx context.Context, id int) (*model.Article, error) {
-	panic(fmt.Errorf("not implemented"))
+func (r *queryResolver) GetArticle(ctx context.Context) ([]*model.Article, error) {
+	return r.getArticle(ctx)
 }
 
 // Query returns generated.QueryResolver implementation.

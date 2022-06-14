@@ -2,7 +2,6 @@ package db
 
 import (
 	"backend/env"
-	"backend/graph/model"
 	"fmt"
 	"log"
 
@@ -22,6 +21,5 @@ func ConnectDatabaseWithGorm() (*gorm.DB, error) {
 		log.Fatal(err)
 	}
 
-	db.AutoMigrate(&model.Article{})
 	return db, nil
 }

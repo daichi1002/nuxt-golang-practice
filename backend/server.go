@@ -4,7 +4,6 @@ import (
 	"backend/db"
 	"backend/graph"
 	"backend/graph/generated"
-	"fmt"
 	"log"
 	"net/http"
 	"os"
@@ -22,8 +21,8 @@ func main() {
 	}
 
 	database, _ := db.ConnectDatabaseWithGorm()
-	fmt.Println(database)
-	srv := handler.NewDefaultServer(generated.NewExecutableSchema(generated.Config{Resolvers: &graph.Resolver{}}))
+
+	srv := handler.NewDefaultServer(generated.NewExecutableSchema(generated.Config{Resolvers: &graph.Resolver{DB:database}}))
 
 	http.Handle("/", playground.Handler("GraphQL playground", "/query"))
 	http.Handle("/query", srv)
