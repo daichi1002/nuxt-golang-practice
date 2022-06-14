@@ -24,25 +24,18 @@ export type Article = {
 
 export type Query = {
   __typename?: 'Query';
-  article: Article;
+  getArticle: Maybe<Array<Article>>;
 };
 
-
-export type QueryArticleArgs = {
-  id: Scalars['Int'];
-};
-
-export type GetArticleQueryVariables = Exact<{
-  id: Scalars['Int'];
-}>;
+export type GetArticleQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetArticleQuery = { __typename?: 'Query', article: { __typename?: 'Article', id: number, title: string, content: string } };
+export type GetArticleQuery = { __typename?: 'Query', getArticle: Array<{ __typename?: 'Article', id: number, title: string, content: string }> | null };
 
 
 export const GetArticleDocument = gql`
-    query getArticle($id: Int!) {
-  article(id: $id) {
+    query getArticle {
+  getArticle {
     id
     title
     content
@@ -57,7 +50,7 @@ const defaultWrapper: SdkFunctionWrapper = (action, _operationName, _operationTy
 
 export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
   return {
-    getArticle(variables: GetArticleQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetArticleQuery> {
+    getArticle(variables?: GetArticleQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetArticleQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetArticleQuery>(GetArticleDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getArticle', 'query');
     }
   };

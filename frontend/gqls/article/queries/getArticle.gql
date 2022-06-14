@@ -1,5 +1,5 @@
-query getArticle($id: Int!) {
-  article(id: $id) {
+query getArticle {
+  getArticle {
     id
     title
     content
