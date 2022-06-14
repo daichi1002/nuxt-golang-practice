@@ -1,8 +1,10 @@
 package main
 
 import (
+	"backend/db"
 	"backend/graph"
 	"backend/graph/generated"
+	"fmt"
 	"log"
 	"net/http"
 	"os"
@@ -19,6 +21,8 @@ func main() {
 		port = defaultPort
 	}
 
+	database, _ := db.ConnectDatabaseWithGorm()
+	fmt.Println(database)
 	srv := handler.NewDefaultServer(generated.NewExecutableSchema(generated.Config{Resolvers: &graph.Resolver{}}))
 
 	http.Handle("/", playground.Handler("GraphQL playground", "/query"))
