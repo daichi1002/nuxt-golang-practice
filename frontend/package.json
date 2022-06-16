@@ -7,7 +7,7 @@
     "preview": "nuxt preview",
     "lint": "eslint --ext .ts,.js,.vue --ignore-path .gitignore .",
     "lintfix": "eslint --fix --ext .ts,.js,.vue --ignore-path .gitignore .",
-    "prepare": "husky install",
+    "prepare": "cd ../ && husky install frontend/.husky",
     "codegen": "graphql-codegen",
     "fix": "yarn lintfix"
   },
