@@ -26,11 +26,15 @@
     "vuetify": "^3.0.0-beta.3"
   },
   "dependencies": {
+    "@apollo/client": "^3.6.8",
     "@graphql-codegen/cli": "^2.6.2",
+    "@graphql-codegen/typed-document-node": "^2.2.13",
     "@graphql-codegen/typescript": "^2.5.1",
     "@graphql-codegen/typescript-graphql-request": "^4.4.10",
     "@graphql-codegen/typescript-operations": "^2.4.2",
     "@nuxtjs/eslint-module": "^3.1.0",
+    "@vue/apollo-composable": "^4.0.0-alpha.17",
+    "@vue/apollo-ssr": "^4.0.0-alpha.17",
     "eslint-plugin-nuxt": "^3.2.0",
     "graphql": "^16.5.0"
   }

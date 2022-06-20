@@ -1,13 +1,10 @@
 overwrite: true
 schema: "../backend/graph/schema.graphqls"
 documents:
-  - ./gqls/**/**/*.gql
-  - ./gqls/*.gql
+  - ./gqls/**/*.gql
 generates:
   lib/generated/client.ts:
     plugins:
       - typescript
       - typescript-operations
       - typescript-graphql-request
-    config:
-      avoidOptionals: true

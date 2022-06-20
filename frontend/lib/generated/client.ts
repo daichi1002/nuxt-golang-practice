@@ -24,13 +24,13 @@ export type Article = {
 
 export type Query = {
   __typename?: 'Query';
-  getArticle: Maybe<Array<Article>>;
+  getArticle?: Maybe<Array<Article>>;
 };
 
 export type GetArticleQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetArticleQuery = { __typename?: 'Query', getArticle: Array<{ __typename?: 'Article', id: number, title: string, content: string }> | null };
+export type GetArticleQuery = { __typename?: 'Query', getArticle?: Array<{ __typename?: 'Article', id: number, title: string, content: string }> | null };
 
 
 export const GetArticleDocument = gql`

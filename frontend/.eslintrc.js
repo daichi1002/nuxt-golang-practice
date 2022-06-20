@@ -11,6 +11,8 @@ module.exports = {
     "prettier",
   ],
 
+  ignorePatterns: ["vue.d.ts", "gql.d.ts", "client.ts"],
+
   plugins: ["vue"],
   rules: {
     "no-console": "off",
