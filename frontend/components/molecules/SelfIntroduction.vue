@@ -1,3 +1,4 @@
+<script setup lang="ts"></script>
 <template>
   <v-container fluid>
     <v-row dense justify="end">
@@ -12,5 +13,3 @@
     </v-row>
   </v-container>
 </template>
-
-<script setup lang="ts"></script>

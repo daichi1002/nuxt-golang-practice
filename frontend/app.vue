@@ -7,9 +7,11 @@
         <v-icon>mdi-magnify</v-icon>
       </v-btn>
 
-      <v-btn icon>
-        <v-icon>mdi-heart</v-icon>
-      </v-btn>
+      <nuxt-link to="/articles/new">
+        <v-btn icon>
+          <v-icon>mdi-pencil-plus-outline</v-icon>
+        </v-btn>
+      </nuxt-link>
       <v-btn icon="mdi-dots-vertical"></v-btn>
     </v-app-bar>
     <v-main>
