@@ -22,6 +22,21 @@ export type Article = {
   title: Scalars['String'];
 };
 
+export type ArticleInput = {
+  content: Scalars['String'];
+  title: Scalars['String'];
+};
+
+export type Mutation = {
+  __typename?: 'Mutation';
+  registerArticle?: Maybe<Array<Article>>;
+};
+
+
+export type MutationRegisterArticleArgs = {
+  input?: InputMaybe<ArticleInput>;
+};
+
 export type Query = {
   __typename?: 'Query';
   getArticle?: Maybe<Array<Article>>;

@@ -4,6 +4,15 @@ type Article {
   content: String!
 }
 
+input ArticleInput {
+  title: String!
+  content: String!
+}
+
 type Query {
   getArticle: [Article!]
+}
+
+type Mutation {
+  registerArticle(input: ArticleInput): [Article!]
 }
