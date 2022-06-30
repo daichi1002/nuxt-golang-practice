@@ -7,15 +7,14 @@ import (
 	"backend/graph/generated"
 	"backend/graph/model"
 	"context"
-	"fmt"
 )
 
-func (r *mutationResolver) RegisterArticle(ctx context.Context, input *model.ArticleInput) ([]*model.Article, error) {
-	panic(fmt.Errorf("not implemented"))
+func (r *mutationResolver) RegisterArticle(ctx context.Context, input *model.ArticleInput) (*bool, error) {
+	return r.registerArticle(input)
 }
 
 func (r *queryResolver) GetArticle(ctx context.Context) ([]*model.Article, error) {
-	return r.getArticle(ctx)
+	return r.getArticle()
 }
 
 // Mutation returns generated.MutationResolver implementation.

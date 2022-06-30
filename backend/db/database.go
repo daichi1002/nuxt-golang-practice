@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"log"
 
+	"backend/graph/model"
+
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )
@@ -19,6 +21,8 @@ func ConnectDatabaseWithGorm() (*gorm.DB, error) {
 	if err != nil {
 		log.Fatal(err)
 	}
+
+	db.AutoMigrate(&model.Article{})
 
 	return db, nil
 }

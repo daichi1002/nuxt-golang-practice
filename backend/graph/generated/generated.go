@@ -59,7 +59,7 @@ type ComplexityRoot struct {
 }
 
 type MutationResolver interface {
-	RegisterArticle(ctx context.Context, input *model.ArticleInput) ([]*model.Article, error)
+	RegisterArticle(ctx context.Context, input *model.ArticleInput) (*bool, error)
 }
 type QueryResolver interface {
 	GetArticle(ctx context.Context) ([]*model.Article, error)
@@ -205,7 +205,7 @@ type Query {
 }
 
 type Mutation {
-  registerArticle(input: ArticleInput): [Article!]
+  registerArticle(input: ArticleInput): Boolean
 }
 `, BuiltIn: false},
 }
@@ -438,9 +438,9 @@ func (ec *executionContext) _Mutation_registerArticle(ctx context.Context, field
 	if resTmp == nil {
 		return graphql.Null
 	}
-	res := resTmp.([]*model.Article)
+	res := resTmp.(*bool)
 	fc.Result = res
-	return ec.marshalOArticle2ᚕᚖbackendᚋgraphᚋmodelᚐArticleᚄ(ctx, field.Selections, res)
+	return ec.marshalOBoolean2ᚖbool(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) fieldContext_Mutation_registerArticle(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
@@ -450,15 +450,7 @@ func (ec *executionContext) fieldContext_Mutation_registerArticle(ctx context.Co
 		IsMethod:   true,
 		IsResolver: true,
 		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
-			switch field.Name {
-			case "id":
-				return ec.fieldContext_Article_id(ctx, field)
-			case "title":
-				return ec.fieldContext_Article_title(ctx, field)
-			case "content":
-				return ec.fieldContext_Article_content(ctx, field)
-			}
-			return nil, fmt.Errorf("no field named %q was found under type Article", field.Name)
+			return nil, errors.New("field of type Boolean does not have child fields")
 		},
 	}
 	defer func() {

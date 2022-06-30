@@ -14,5 +14,5 @@ type Query {
 }
 
 type Mutation {
-  registerArticle(input: ArticleInput): [Article!]
+  registerArticle(input: ArticleInput): Boolean
 }

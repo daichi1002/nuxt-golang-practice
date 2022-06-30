@@ -2,7 +2,6 @@ package graph
 
 import (
 	"backend/graph/model"
-	"context"
 
 	"gorm.io/gorm"
 )
@@ -15,9 +14,26 @@ type Resolver struct {
 	DB *gorm.DB
 }
 
-func (r *Resolver) getArticle(ctx context.Context) ([]*model.Article, error) {
+func (r *Resolver) getArticle() ([]*model.Article, error) {
 	var articles []*model.Article
 	err := r.DB.Find(&articles).Error
 
 	return articles, err
+}
+
+func (r *Resolver) registerArticle(input *model.ArticleInput) (*bool, error) {
+	var result *bool
+
+	newArticle := &model.Article{
+		Title:   input.Title,
+		Content: input.Content,
+	}
+
+	err := r.DB.Create(&newArticle).Error
+
+	if err != nil {
+		*result = true
+	}
+
+	return result, err
 }

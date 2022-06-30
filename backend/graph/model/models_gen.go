@@ -3,7 +3,7 @@
 package model
 
 type Article struct {
-	ID      int    `json:"id"`
+	ID      int    `json:"id" gorm:"primaryKey"`
 	Title   string `json:"title"`
 	Content string `json:"content"`
 }
