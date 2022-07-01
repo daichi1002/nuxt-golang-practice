@@ -1,4 +1,10 @@
 <script setup lang="ts">
+import { sdk } from "~/gqls/graphqlClient";
+import {
+  ArticleInput,
+  RegisterArticleMutationVariables,
+} from "~~/lib/generated/client";
+
 const valid = true;
 
 const titleRules = [
@@ -7,17 +13,19 @@ const titleRules = [
     (v && v.length <= 10) || "Title must be less than 10 characters",
 ];
 
-type Article = {
-  title: string;
-  content: string;
-};
-
-const newArticle = reactive<Article>({
+const newArticle = reactive<ArticleInput>({
   title: "",
   content: "",
 });
 
-const save = () => console.log("save!");
+const save = () => {
+  const data: RegisterArticleMutationVariables = {
+    input: newArticle,
+  };
+
+  sdk.registerArticle(data);
+};
+
 const reset = () => console.log("reset!");
 </script>
 

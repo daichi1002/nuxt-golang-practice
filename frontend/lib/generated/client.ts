@@ -29,7 +29,7 @@ export type ArticleInput = {
 
 export type Mutation = {
   __typename?: 'Mutation';
-  registerArticle?: Maybe<Array<Article>>;
+  registerArticle?: Maybe<Scalars['Boolean']>;
 };
 
 
@@ -42,12 +42,24 @@ export type Query = {
   getArticle?: Maybe<Array<Article>>;
 };
 
+export type RegisterArticleMutationVariables = Exact<{
+  input?: InputMaybe<ArticleInput>;
+}>;
+
+
+export type RegisterArticleMutation = { __typename?: 'Mutation', registerArticle?: boolean | null };
+
 export type GetArticleQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type GetArticleQuery = { __typename?: 'Query', getArticle?: Array<{ __typename?: 'Article', id: number, title: string, content: string }> | null };
 
 
+export const RegisterArticleDocument = gql`
+    mutation registerArticle($input: ArticleInput) {
+  registerArticle(input: $input)
+}
+    `;
 export const GetArticleDocument = gql`
     query getArticle {
   getArticle {
@@ -65,6 +77,9 @@ const defaultWrapper: SdkFunctionWrapper = (action, _operationName, _operationTy
 
 export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
   return {
+    registerArticle(variables?: RegisterArticleMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<RegisterArticleMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<RegisterArticleMutation>(RegisterArticleDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'registerArticle', 'mutation');
+    },
     getArticle(variables?: GetArticleQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetArticleQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetArticleQuery>(GetArticleDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getArticle', 'query');
     }

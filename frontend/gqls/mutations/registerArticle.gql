@@ -1,0 +1,3 @@
+mutation registerArticle($input: ArticleInput) {
+  registerArticle(input: $input)
+}
