@@ -12,19 +12,20 @@ import {
   RegisterArticleMutationVariables,
 } from "~~/lib/generated/client";
 
-const valid = true;
-
+// validation
 const titleRules = [
   (v: string) => !!v || "Title is required",
   (v: string) =>
     (v && v.length <= 10) || "Title must be less than 10 characters",
 ];
 
+// data
 const newArticle = reactive<ArticleInput>({
   title: "",
   content: "",
 });
 
+// create
 const save = () => {
   const fn = useNuxtApp().vueApp.config.globalProperties;
   fn.$swal.fire(confirm).then((result: SweetAlertResult) => {
@@ -47,16 +48,20 @@ const fixInputDetail = async (fn: Record<string, any>) => {
     return false;
   }
   await fn.$swal.fire(done);
-
+  reset();
   return true;
 };
 
-const reset = () => console.log("reset!");
+// reset
+const reset = () => {
+  newArticle.title = "";
+  newArticle.content = "";
+};
 </script>
 
 <template>
   <v-main>
-    <v-form v-model="valid">
+    <v-form>
       <v-container>
         <v-text-field
           v-model="newArticle.title"
