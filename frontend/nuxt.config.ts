@@ -6,6 +6,7 @@ export default defineNuxtConfig({
     shim: false,
     strict: true,
   },
+  types: ["vue-sweetalert2"],
   css: ["vuetify/styles"],
   build: {
     transpile: ["vuetify"],

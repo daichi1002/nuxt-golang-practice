@@ -1,5 +1,12 @@
 <script setup lang="ts">
+import { SweetAlertResult } from "sweetalert2";
 import { sdk } from "~/gqls/graphqlClient";
+import {
+  done,
+  loading,
+  confirm,
+  error_register,
+} from "~~/constants/swalConfiguration";
 import {
   ArticleInput,
   RegisterArticleMutationVariables,
@@ -19,11 +26,29 @@ const newArticle = reactive<ArticleInput>({
 });
 
 const save = () => {
-  const data: RegisterArticleMutationVariables = {
-    input: newArticle,
-  };
+  const fn = useNuxtApp().vueApp.config.globalProperties;
+  fn.$swal.fire(confirm).then((result: SweetAlertResult) => {
+    if (result.isConfirmed) {
+      fixInputDetail(fn);
+      fn.$swal.fire(loading);
+    }
+  });
+};
 
-  sdk.registerArticle(data);
+const fixInputDetail = async (fn: Record<string, any>) => {
+  try {
+    const data: RegisterArticleMutationVariables = {
+      input: newArticle,
+    };
+
+    await sdk.registerArticle(data);
+  } catch (error) {
+    fn.$swal.fire(error_register);
+    return false;
+  }
+  await fn.$swal.fire(done);
+
+  return true;
 };
 
 const reset = () => console.log("reset!");
