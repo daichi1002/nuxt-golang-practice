@@ -1,11 +1,10 @@
 <script setup lang="ts">
 import ArticleList from "~/components/organisms/ArticleList.vue";
 import SelfIntroduction from "~/components/molecules/SelfIntroduction.vue";
-import { sdk } from "~/gqls/graphqlClient";
+import { ArticleClass } from "~~/models/articleClass";
 
-const articles = await sdk.getArticle().then((res) => {
-  return res.getArticle;
-});
+const articles = await ArticleClass.getAllArticles();
+const { state, setArticle } = useArticle();
 </script>
 
 <template>
