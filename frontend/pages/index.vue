@@ -4,7 +4,14 @@ import SelfIntroduction from "~/components/molecules/SelfIntroduction.vue";
 import { ArticleClass } from "~~/models/articleClass";
 
 const articles = await ArticleClass.getAllArticles();
-const { state, setArticle } = useArticle();
+
+const setState = () => {
+  const { state, setArticle } = useArticle();
+  setArticle(articles);
+  const articleState = state.value.article;
+
+  return articleState;
+};
 </script>
 
 <template>
@@ -13,7 +20,7 @@ const { state, setArticle } = useArticle();
       <v-row>
         <div style="display: flex">
           <v-col cols="8">
-            <ArticleList :articles="articles" />
+            <ArticleList :articles="setState()" />
           </v-col>
           <v-col cols="4">
             <SelfIntroduction />

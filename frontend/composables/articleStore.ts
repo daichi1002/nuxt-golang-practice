@@ -1,8 +1,7 @@
 import type { Ref } from "vue";
-import { Article, GetArticleQuery } from "~~/lib/generated/client";
 
 type ArticleState = {
-  article: GetArticleQuery[];
+  article: ArticleType[];
 };
 
 export const useArticle = () => {
@@ -17,7 +16,7 @@ export const useArticle = () => {
 };
 
 const setArticle = (state: Ref<ArticleState>) => {
-  return (articles: GetArticleQuery[]) => {
+  return (articles: ArticleType[]) => {
     state.value.article = articles;
   };
 };
