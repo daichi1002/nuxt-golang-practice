@@ -6,6 +6,11 @@ defineProps({
     default: null,
   },
 });
+const router = useRouter();
+
+const showArticle = (id: number) => {
+  router.push(`/articles/${id}`);
+};
 </script>
 
 <template>
@@ -16,6 +21,7 @@ defineProps({
           :title="article.title"
           :text="article.content"
           height="200"
+          @click="showArticle(article.id)"
         ></v-card>
       </v-col>
     </v-row>
