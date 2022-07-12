@@ -16,4 +16,5 @@ type Query {
 
 type Mutation {
   registerArticle(input: ArticleInput): Boolean
+  deleteArticle(id: Int!): Boolean
 }

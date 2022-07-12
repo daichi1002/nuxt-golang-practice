@@ -13,6 +13,10 @@ func (r *mutationResolver) RegisterArticle(ctx context.Context, input *model.Art
 	return r.registerArticle(input)
 }
 
+func (r *mutationResolver) DeleteArticle(ctx context.Context, id int) (*bool, error) {
+	return r.deleteArticle(id)
+}
+
 func (r *queryResolver) GetArticle(ctx context.Context) ([]*model.Article, error) {
 	return r.getArticle()
 }

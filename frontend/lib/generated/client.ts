@@ -30,7 +30,13 @@ export type ArticleInput = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  deleteArticle?: Maybe<Scalars['Boolean']>;
   registerArticle?: Maybe<Scalars['Boolean']>;
+};
+
+
+export type MutationDeleteArticleArgs = {
+  id: Scalars['Int'];
 };
 
 
@@ -42,6 +48,13 @@ export type Query = {
   __typename?: 'Query';
   getArticle?: Maybe<Array<Article>>;
 };
+
+export type DeleteArticleMutationVariables = Exact<{
+  id: Scalars['Int'];
+}>;
+
+
+export type DeleteArticleMutation = { __typename?: 'Mutation', deleteArticle?: boolean | null };
 
 export type RegisterArticleMutationVariables = Exact<{
   input?: InputMaybe<ArticleInput>;
@@ -56,6 +69,11 @@ export type GetArticleQueryVariables = Exact<{ [key: string]: never; }>;
 export type GetArticleQuery = { __typename?: 'Query', getArticle?: Array<{ __typename?: 'Article', id: number, title: string, content: string }> | null };
 
 
+export const DeleteArticleDocument = gql`
+    mutation deleteArticle($id: Int!) {
+  deleteArticle(id: $id)
+}
+    `;
 export const RegisterArticleDocument = gql`
     mutation registerArticle($input: ArticleInput) {
   registerArticle(input: $input)
@@ -78,6 +96,9 @@ const defaultWrapper: SdkFunctionWrapper = (action, _operationName, _operationTy
 
 export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
   return {
+    deleteArticle(variables: DeleteArticleMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<DeleteArticleMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<DeleteArticleMutation>(DeleteArticleDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'deleteArticle', 'mutation');
+    },
     registerArticle(variables?: RegisterArticleMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<RegisterArticleMutation> {
       return withWrapper((wrappedRequestHeaders) => client.request<RegisterArticleMutation>(RegisterArticleDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'registerArticle', 'mutation');
     },

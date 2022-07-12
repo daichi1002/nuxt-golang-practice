@@ -38,3 +38,15 @@ func (r *Resolver) registerArticle(input *model.ArticleInput) (*bool, error) {
 
 	return result, err
 }
+
+func (r *Resolver) deleteArticle(id int) (*bool, error) {
+	var result *bool
+
+	err := r.DB.Delete(&model.Article{}, id).Error
+
+	if err != nil {
+		*result = true
+	}
+
+	return result, err
+}
