@@ -24,6 +24,7 @@ export type Article = {
 
 export type ArticleInput = {
   content: Scalars['String'];
+  id: Scalars['Int'];
   title: Scalars['String'];
 };
 

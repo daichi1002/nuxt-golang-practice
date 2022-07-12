@@ -15,7 +15,7 @@ import (
 	"github.com/rs/cors"
 )
 
-const defaultPort = "8080"
+const defaultPort = "8000"
 
 func main() {
 	port := os.Getenv("PORT")
@@ -52,7 +52,7 @@ func main() {
 	router.Handle("/", playground.Handler("GraphQL playground", "/query"))
 	router.Handle("/query", srv)
 
-	err := http.ListenAndServe(":8080", router)
+	err := http.ListenAndServe(":8000", router)
 	if err != nil {
 		panic(err)
 	}

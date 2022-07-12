@@ -25,11 +25,12 @@ func (r *Resolver) registerArticle(input *model.ArticleInput) (*bool, error) {
 	var result *bool
 
 	newArticle := &model.Article{
+		ID:      input.ID,
 		Title:   input.Title,
 		Content: input.Content,
 	}
 
-	err := r.DB.Create(&newArticle).Error
+	err := r.DB.Save(&newArticle).Error
 
 	if err != nil {
 		*result = true

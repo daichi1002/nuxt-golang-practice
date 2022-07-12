@@ -4,7 +4,7 @@ import { provideApolloClient } from "@vue/apollo-composable";
 
 export function createApolloClient(ssr = false) {
   const httpLink = new BatchHttpLink({
-    uri: "http://localhost:8080/query",
+    uri: "http://localhost:8000/query",
   });
 
   const cache = new InMemoryCache();

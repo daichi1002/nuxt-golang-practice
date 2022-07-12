@@ -196,6 +196,7 @@ var sources = []*ast.Source{
 }
 
 input ArticleInput {
+  id: Int!
   title: String!
   content: String!
 }
@@ -2427,6 +2428,14 @@ func (ec *executionContext) unmarshalInputArticleInput(ctx context.Context, obj 
 
 	for k, v := range asMap {
 		switch k {
+		case "id":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("id"))
+			it.ID, err = ec.unmarshalNInt2int(ctx, v)
+			if err != nil {
+				return it, err
+			}
 		case "title":
 			var err error
 

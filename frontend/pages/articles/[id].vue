@@ -1,28 +1,44 @@
 <script setup lang="ts">
 import { SweetAlertResult } from "sweetalert2";
-import { done, error_register, loading } from "~~/constants/swalConfiguration";
+import {
+  done,
+  loading,
+  confirm,
+  error_register,
+} from "~~/constants/swalConfiguration";
 import { sdk } from "~~/gqls/graphqlClient";
 import {
   ArticleInput,
   RegisterArticleMutationVariables,
 } from "~~/lib/generated/client";
 
+const editable = ref(false);
 const route = useRoute();
 const id = route.params.id;
 
-const titleRules = [
-  (v: string) => !!v || "Title is required",
-  (v: string) =>
-    (v && v.length <= 10) || "Title must be less than 10 characters",
-];
-
 // data
 const newArticle = reactive<ArticleInput>({
+  id: 0,
   title: "",
   content: "",
 });
 
-const switch1 = ref(true);
+const labelChange = (editable: boolean) => {
+  return editable ? "edit" : "show";
+};
+
+// get show article
+const { state } = useArticle();
+const showArticle = () => {
+  state.value.article.forEach((art) => {
+    if (art.id === Number(id)) {
+      newArticle.id = art.id;
+      newArticle.title = art.title;
+      newArticle.content = art.content;
+    }
+  });
+};
+showArticle();
 
 const save = () => {
   const fn = useNuxtApp().vueApp.config.globalProperties;
@@ -39,21 +55,13 @@ const fixInputDetail = async (fn: Record<string, any>) => {
     const data: RegisterArticleMutationVariables = {
       input: newArticle,
     };
-
     await sdk.registerArticle(data);
   } catch (error) {
     fn.$swal.fire(error_register);
     return false;
   }
   await fn.$swal.fire(done);
-  reset();
   return true;
-};
-
-// reset
-const reset = () => {
-  newArticle.title = "";
-  newArticle.content = "";
 };
 </script>
 
@@ -61,43 +69,59 @@ const reset = () => {
   <v-form>
     <v-container>
       <v-switch
-        v-model="switch1"
-        label="edit"
+        v-model="editable"
+        :label="labelChange(editable)"
         color="orange"
-        value="orange"
         hide-details
       ></v-switch>
-      <v-text-field
-        v-model="newArticle.title"
-        :rules="titleRules"
-        :counter="10"
-        label="Title"
-        color="primary"
-        required
-      ></v-text-field>
+      <div v-if="editable">
+        <v-text-field
+          v-model="newArticle.title"
+          :counter="10"
+          label="Title"
+          color="primary"
+          required
+        ></v-text-field>
 
-      <v-textarea
-        v-model="newArticle.content"
-        label="Content"
-        rows="14"
-        color="primary"
-      ></v-textarea>
+        <v-textarea
+          v-model="newArticle.content"
+          label="Content"
+          rows="14"
+          color="primary"
+        ></v-textarea>
+      </div>
+      <div v-else>
+        <v-text-field
+          v-model="newArticle.title"
+          :counter="10"
+          label="Title"
+          color="primary"
+          required
+          readonly
+        ></v-text-field>
+
+        <v-textarea
+          v-model="newArticle.content"
+          label="Content"
+          rows="14"
+          color="primary"
+          readonly
+        ></v-textarea>
+      </div>
     </v-container>
     <v-row justify="center">
-      <v-btn
-        class="btn-interval"
-        color="primary"
-        variant="outlined"
-        @click="reset()"
-        >edit</v-btn
-      >
-      <v-btn
-        class="btn-interval"
-        color="primary"
-        variant="outlined"
-        @click="reset()"
-        >delete</v-btn
-      >
+      <div v-if="editable">
+        <v-btn class="btn-interval" color="primary" variant="outlined"
+          >delete</v-btn
+        >
+        <v-btn
+          class="btn-interval"
+          color="primary"
+          variant="outlined"
+          @click="save()"
+          >edit</v-btn
+        >
+      </div>
     </v-row>
   </v-form>
 </template>

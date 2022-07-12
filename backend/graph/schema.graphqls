@@ -5,6 +5,7 @@ type Article {
 }
 
 input ArticleInput {
+  id: Int!
   title: String!
   content: String!
 }

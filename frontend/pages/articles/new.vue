@@ -12,15 +12,9 @@ import {
   RegisterArticleMutationVariables,
 } from "~~/lib/generated/client";
 
-// validation
-const titleRules = [
-  (v: string) => !!v || "Title is required",
-  (v: string) =>
-    (v && v.length <= 10) || "Title must be less than 10 characters",
-];
-
 // data
 const newArticle = reactive<ArticleInput>({
+  id: 0,
   title: "",
   content: "",
 });
@@ -65,7 +59,6 @@ const reset = () => {
       <v-container>
         <v-text-field
           v-model="newArticle.title"
-          :rules="titleRules"
           :counter="10"
           label="Title"
           color="primary"
