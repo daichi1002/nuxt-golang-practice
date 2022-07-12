@@ -5,16 +5,21 @@ import {
   loading,
   confirm,
   error_register,
+  deleteConfirm,
+  deleteDone,
+  error_delete,
 } from "~~/constants/swalConfiguration";
 import { sdk } from "~~/gqls/graphqlClient";
 import {
   ArticleInput,
+  DeleteArticleMutationVariables,
   RegisterArticleMutationVariables,
 } from "~~/lib/generated/client";
 
 const editable = ref(false);
 const route = useRoute();
-const id = route.params.id;
+const articleId = Number(route.params.id);
+const router = useRouter();
 
 // data
 const newArticle = reactive<ArticleInput>({
@@ -31,7 +36,7 @@ const labelChange = (editable: boolean) => {
 const { state } = useArticle();
 const showArticle = () => {
   state.value.article.forEach((art) => {
-    if (art.id === Number(id)) {
+    if (art.id === articleId) {
       newArticle.id = art.id;
       newArticle.title = art.title;
       newArticle.content = art.content;
@@ -61,6 +66,32 @@ const fixInputDetail = async (fn: Record<string, any>) => {
     return false;
   }
   await fn.$swal.fire(done);
+  return true;
+};
+
+// delete
+const deleteArticle = () => {
+  const fn = useNuxtApp().vueApp.config.globalProperties;
+  fn.$swal.fire(deleteConfirm).then((result: SweetAlertResult) => {
+    if (result.isConfirmed) {
+      fixDeleteData(fn);
+      fn.$swal.fire(loading);
+    }
+  });
+};
+
+const fixDeleteData = async (fn: Record<string, any>) => {
+  try {
+    const data: DeleteArticleMutationVariables = {
+      id: articleId,
+    };
+    await sdk.deleteArticle(data);
+  } catch (error) {
+    fn.$swal.fire(error_delete);
+    return false;
+  }
+  await fn.$swal.fire(deleteDone);
+  router.push("/");
   return true;
 };
 </script>
@@ -111,7 +142,11 @@ const fixInputDetail = async (fn: Record<string, any>) => {
     </v-container>
     <v-row justify="center">
       <div v-if="editable">
-        <v-btn class="btn-interval" color="primary" variant="outlined"
+        <v-btn
+          class="btn-interval"
+          color="primary"
+          variant="outlined"
+          @click="deleteArticle()"
           >delete</v-btn
         >
         <v-btn

@@ -1,6 +1,7 @@
 import swal from "sweetalert2";
 
 const confirmButtonColor = "#00a7db";
+const deleteConfirmButtonColor = "#db2400";
 
 const error = {
   icon: "error",
@@ -28,6 +29,16 @@ export const confirm = {
   allowEnterKey: false,
 } as const;
 
+export const deleteConfirm = {
+  title: "削除してよろしいですか？",
+  icon: "warning",
+  confirmButtonText: "削除する",
+  cancelButtonText: "キャンセル",
+  confirmButtonColor,
+  showCancelButton: true,
+  allowEnterKey: false,
+} as const;
+
 export const error_invalid = (
   message: string = "正しい値を入力してください"
 ) => {
@@ -48,6 +59,11 @@ export const error_register = {
   ...error,
 } as const;
 
+export const error_delete = {
+  ...{ title: "削除に失敗しました" },
+  ...error,
+} as const;
+
 export const errorFind = {
   ...{ title: "検索に失敗しました" },
   ...error,
@@ -65,6 +81,12 @@ export const error_import = {
 
 export const done = {
   ...{ title: "入力を確定しました" },
+  confirmButtonText: "OK",
+  ...success,
+} as const;
+
+export const deleteDone = {
+  ...{ title: "削除が完了しました" },
   confirmButtonText: "OK",
   ...success,
 } as const;
