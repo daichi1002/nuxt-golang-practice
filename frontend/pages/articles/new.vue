@@ -12,6 +12,7 @@ import {
   RegisterArticleMutationVariables,
 } from "~~/lib/generated/client";
 
+const router = useRouter();
 // data
 const newArticle = reactive<ArticleInput>({
   id: 0,
@@ -42,7 +43,7 @@ const fixInputDetail = async (fn: Record<string, any>) => {
     return false;
   }
   await fn.$swal.fire(done);
-  reset();
+  router.push("/");
   return true;
 };
 
