@@ -49,6 +49,16 @@ export type Query = {
   getArticle?: Maybe<Array<Article>>;
 };
 
+export type User = {
+  __typename?: 'User';
+  email: Scalars['String'];
+  id: Scalars['Int'];
+  job?: Maybe<Scalars['String']>;
+  name: Scalars['String'];
+  password: Scalars['String'];
+  role: Scalars['Int'];
+};
+
 export type DeleteArticleMutationVariables = Exact<{
   id: Scalars['Int'];
 }>;

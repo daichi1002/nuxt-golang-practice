@@ -13,3 +13,12 @@ type ArticleInput struct {
 	Title   string `json:"title"`
 	Content string `json:"content"`
 }
+
+type User struct {
+	ID       int     `json:"id"`
+	Name     string  `json:"name"`
+	Email    string  `json:"email"`
+	Password string  `json:"password"`
+	Job      *string `json:"job"`
+	Role     int     `json:"role"`
+}

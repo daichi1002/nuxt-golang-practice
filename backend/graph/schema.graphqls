@@ -4,6 +4,15 @@ type Article {
   content: String!
 }
 
+type User {
+  id: Int!
+  name: String!
+  email: String!
+  password: String!
+  job: String
+  role: Int!
+}
+
 input ArticleInput {
   id: Int!
   title: String!
