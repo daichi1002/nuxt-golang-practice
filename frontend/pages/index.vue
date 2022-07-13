@@ -19,12 +19,8 @@ const setState = () => {
     <v-main>
       <v-row>
         <div style="display: flex">
-          <v-col cols="8">
-            <ArticleList :articles="setState()" />
-          </v-col>
-          <v-col cols="4">
-            <SelfIntroduction />
-          </v-col>
+          <ArticleList :articles="setState()" />
+          <SelfIntroduction />
         </div>
       </v-row>
     </v-main>

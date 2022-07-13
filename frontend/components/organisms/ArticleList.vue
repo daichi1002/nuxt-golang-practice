@@ -14,16 +14,18 @@ const showArticle = (id: number) => {
 </script>
 
 <template>
-  <v-container fluid>
-    <v-row>
-      <v-col v-for="(article, i) in articles" :key="i" cols="12">
-        <v-card
-          :title="article.title"
-          :text="article.content"
-          height="200"
-          @click="showArticle(article.id)"
-        ></v-card>
-      </v-col>
-    </v-row>
-  </v-container>
+  <v-col v-if="articles.length > 0" cols="8">
+    <div v-for="(article, i) in articles" :key="i">
+      <v-card
+        :title="article.title"
+        :text="article.content"
+        height="200"
+        width="700"
+        @click="showArticle(article.id)"
+      ></v-card>
+    </div>
+  </v-col>
+  <v-col v-else cols="8" style="width: 700px">
+    記事が作成されていません。
+  </v-col>
 </template>

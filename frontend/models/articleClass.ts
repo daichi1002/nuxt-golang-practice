@@ -14,7 +14,7 @@ export class ArticleClass {
       return res.getArticle;
     });
 
-    if (response === null || response === undefined || response.length === 0) {
+    if (response === null || response === undefined) {
       throw new Error("データの取得に失敗しました。");
     }
 
