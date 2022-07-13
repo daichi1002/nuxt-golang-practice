@@ -2,10 +2,16 @@
 
 package model
 
+import (
+	"time"
+)
+
 type Article struct {
-	ID      int    `json:"id"`
-	Title   string `json:"title"`
-	Content string `json:"content"`
+	ID        int        `json:"id"`
+	Title     string     `json:"title"`
+	Content   string     `json:"content"`
+	CreatedAt *time.Time `json:"createdAt"`
+	UpdatedAt *time.Time `json:"updatedAt"`
 }
 
 type ArticleInput struct {
@@ -15,10 +21,12 @@ type ArticleInput struct {
 }
 
 type User struct {
-	ID       int     `json:"id"`
-	Name     string  `json:"name"`
-	Email    string  `json:"email"`
-	Password string  `json:"password"`
-	Job      *string `json:"job"`
-	Role     int     `json:"role"`
+	ID        int        `json:"id"`
+	Name      string     `json:"name"`
+	Email     string     `json:"email"`
+	Password  string     `json:"password"`
+	Job       *string    `json:"job"`
+	Role      int        `json:"role"`
+	CreatedAt *time.Time `json:"createdAt"`
+	UpdatedAt *time.Time `json:"updatedAt"`
 }

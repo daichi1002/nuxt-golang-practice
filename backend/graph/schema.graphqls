@@ -1,7 +1,11 @@
+scalar Time
+
 type Article {
   id: Int!
   title: String!
   content: String!
+  createdAt: Time
+  updatedAt: Time
 }
 
 type User {
@@ -11,6 +15,8 @@ type User {
   password: String!
   job: String
   role: Int!
+  createdAt: Time
+  updatedAt: Time
 }
 
 input ArticleInput {

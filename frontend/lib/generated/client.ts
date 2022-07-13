@@ -13,13 +13,16 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
+  Time: any;
 };
 
 export type Article = {
   __typename?: 'Article';
   content: Scalars['String'];
+  createdAt?: Maybe<Scalars['Time']>;
   id: Scalars['Int'];
   title: Scalars['String'];
+  updatedAt?: Maybe<Scalars['Time']>;
 };
 
 export type ArticleInput = {
@@ -51,12 +54,14 @@ export type Query = {
 
 export type User = {
   __typename?: 'User';
+  createdAt?: Maybe<Scalars['Time']>;
   email: Scalars['String'];
   id: Scalars['Int'];
   job?: Maybe<Scalars['String']>;
   name: Scalars['String'];
   password: Scalars['String'];
   role: Scalars['Int'];
+  updatedAt?: Maybe<Scalars['Time']>;
 };
 
 export type DeleteArticleMutationVariables = Exact<{
