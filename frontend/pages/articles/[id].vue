@@ -146,6 +146,8 @@ const fixDeleteData = async (fn: Record<string, any>) => {
           class="btn-interval"
           color="primary"
           variant="outlined"
+          disabled
+          depressed
           @click="deleteArticle()"
           >delete</v-btn
         >
@@ -156,6 +158,10 @@ const fixDeleteData = async (fn: Record<string, any>) => {
           @click="save()"
           >edit</v-btn
         >
+      </div>
+      <div v-else>
+        <v-btn class="btn-interval" disabled depressed>delete</v-btn>
+        <v-btn class="btn-interval" disabled depressed>edit</v-btn>
       </div>
     </v-row>
   </v-form>
