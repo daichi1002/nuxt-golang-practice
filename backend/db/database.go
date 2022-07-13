@@ -22,7 +22,7 @@ func ConnectDatabaseWithGorm() (*gorm.DB, error) {
 		log.Fatal(err)
 	}
 
-	db.AutoMigrate(&model.Article{})
+	db.AutoMigrate(&model.Article{}, &model.User{})
 
 	return db, nil
 }
