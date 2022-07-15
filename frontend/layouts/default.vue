@@ -1,18 +1,7 @@
 <script setup lang="ts">
-import { useRouter } from "vue-router";
-
 definePageMeta({
   layout: false,
 });
-
-const router = useRouter();
-
-const changeHomePage = () => {
-  router.push("/");
-};
-// const changeNewPage = () => {
-//   router.push("/articles/new");
-// };
 </script>
 <template>
   <div>
@@ -30,7 +19,11 @@ const changeHomePage = () => {
         </v-btn>
       </a>
 
-      <v-btn icon="mdi-dots-vertical"></v-btn>
+      <a href="/users/signUp">
+        <v-btn icon>
+          <v-icon>mdi-account-lock-open-outline</v-icon>
+        </v-btn>
+      </a>
     </v-app-bar>
   </div>
 </template>

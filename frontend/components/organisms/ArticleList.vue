@@ -15,7 +15,7 @@ const showArticle = (id: number) => {
 
 <template>
   <v-col v-if="articles.length > 0" cols="8">
-    <div v-for="(article, i) in articles" :key="i">
+    <div v-for="(article, i) in articles" :key="i" style="margin-bottom: 20px">
       <v-card
         :title="article.title"
         :text="article.content"
