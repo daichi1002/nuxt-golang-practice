@@ -7,6 +7,7 @@ import (
 	"backend/graph/generated"
 	"backend/graph/model"
 	"context"
+	"fmt"
 )
 
 func (r *mutationResolver) RegisterArticle(ctx context.Context, input *model.ArticleInput) (*bool, error) {
@@ -15,6 +16,10 @@ func (r *mutationResolver) RegisterArticle(ctx context.Context, input *model.Art
 
 func (r *mutationResolver) DeleteArticle(ctx context.Context, id int) (*bool, error) {
 	return r.deleteArticle(id)
+}
+
+func (r *mutationResolver) RegisterUser(ctx context.Context, input *model.UserInput) (*model.User, error) {
+	panic(fmt.Errorf("not implemented"))
 }
 
 func (r *queryResolver) GetArticle(ctx context.Context) ([]*model.Article, error) {

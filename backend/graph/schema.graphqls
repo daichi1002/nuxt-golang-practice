@@ -25,6 +25,15 @@ input ArticleInput {
   content: String!
 }
 
+input UserInput {
+  id: Int!
+  name: String!
+  email: String!
+  password: String!
+  job: String
+  role: Int!
+}
+
 type Query {
   getArticle: [Article!]
 }
@@ -32,4 +41,5 @@ type Query {
 type Mutation {
   registerArticle(input: ArticleInput): Boolean
   deleteArticle(id: Int!): Boolean
+  registerUser(input: UserInput): User!
 }

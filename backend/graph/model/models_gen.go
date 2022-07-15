@@ -30,3 +30,12 @@ type User struct {
 	CreatedAt *time.Time `json:"createdAt"`
 	UpdatedAt *time.Time `json:"updatedAt"`
 }
+
+type UserInput struct {
+	ID       int     `json:"id"`
+	Name     string  `json:"name"`
+	Email    string  `json:"email"`
+	Password string  `json:"password"`
+	Job      *string `json:"job"`
+	Role     int     `json:"role"`
+}

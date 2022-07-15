@@ -35,6 +35,7 @@ export type Mutation = {
   __typename?: 'Mutation';
   deleteArticle?: Maybe<Scalars['Boolean']>;
   registerArticle?: Maybe<Scalars['Boolean']>;
+  registerUser: User;
 };
 
 
@@ -45,6 +46,11 @@ export type MutationDeleteArticleArgs = {
 
 export type MutationRegisterArticleArgs = {
   input?: InputMaybe<ArticleInput>;
+};
+
+
+export type MutationRegisterUserArgs = {
+  input?: InputMaybe<UserInput>;
 };
 
 export type Query = {
@@ -64,6 +70,15 @@ export type User = {
   updatedAt?: Maybe<Scalars['Time']>;
 };
 
+export type UserInput = {
+  email: Scalars['String'];
+  id: Scalars['Int'];
+  job?: InputMaybe<Scalars['String']>;
+  name: Scalars['String'];
+  password: Scalars['String'];
+  role: Scalars['Int'];
+};
+
 export type DeleteArticleMutationVariables = Exact<{
   id: Scalars['Int'];
 }>;
@@ -77,6 +92,13 @@ export type RegisterArticleMutationVariables = Exact<{
 
 
 export type RegisterArticleMutation = { __typename?: 'Mutation', registerArticle?: boolean | null };
+
+export type RegisterUserMutationVariables = Exact<{
+  input?: InputMaybe<UserInput>;
+}>;
+
+
+export type RegisterUserMutation = { __typename?: 'Mutation', registerUser: { __typename?: 'User', id: number, name: string, email: string, password: string, job?: string | null, role: number, createdAt?: any | null, updatedAt?: any | null } };
 
 export type GetArticleQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -92,6 +114,20 @@ export const DeleteArticleDocument = gql`
 export const RegisterArticleDocument = gql`
     mutation registerArticle($input: ArticleInput) {
   registerArticle(input: $input)
+}
+    `;
+export const RegisterUserDocument = gql`
+    mutation registerUser($input: UserInput) {
+  registerUser(input: $input) {
+    id
+    name
+    email
+    password
+    job
+    role
+    createdAt
+    updatedAt
+  }
 }
     `;
 export const GetArticleDocument = gql`
@@ -116,6 +152,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     registerArticle(variables?: RegisterArticleMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<RegisterArticleMutation> {
       return withWrapper((wrappedRequestHeaders) => client.request<RegisterArticleMutation>(RegisterArticleDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'registerArticle', 'mutation');
+    },
+    registerUser(variables?: RegisterUserMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<RegisterUserMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<RegisterUserMutation>(RegisterUserDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'registerUser', 'mutation');
     },
     getArticle(variables?: GetArticleQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetArticleQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetArticleQuery>(GetArticleDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getArticle', 'query');

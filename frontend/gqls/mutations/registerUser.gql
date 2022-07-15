@@ -1,0 +1,12 @@
+mutation registerUser($input: UserInput) {
+  registerUser(input: $input) {
+    id
+    name
+    email
+    password
+    job
+    role
+    createdAt
+    updatedAt
+  }
+}
