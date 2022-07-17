@@ -2,6 +2,7 @@ package graph
 
 import (
 	"backend/graph/model"
+	"log"
 
 	"gorm.io/gorm"
 )
@@ -49,4 +50,23 @@ func (r *Resolver) deleteArticle(id int) (*bool, error) {
 	}
 
 	return result, err
+}
+
+func (r *Resolver) registerUser(input *model.UserInput) (*model.User, error) {
+	result := &model.User{
+		ID:       input.ID,
+		Name:     input.Name,
+		Email:    input.Email,
+		Password: input.Password,
+		Job:      input.Job,
+		Role:     input.Role,
+	}
+	err := r.DB.Save(&result).Error
+
+	if err != nil {
+		log.Fatal(err)
+		return nil, err
+	}
+
+	return result, nil
 }
